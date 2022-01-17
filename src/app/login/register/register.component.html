@@ -1,0 +1,65 @@
+<div class="register-form-container">
+  <form
+    class="register-form"
+    [formGroup]="registerForm"
+    (ngSubmit)="registerUser(registerForm.value)"
+  >
+    <h2>Register an user</h2>
+    <mat-form-field appearance="fill">
+      <label>Enter your first name</label>
+      <input matInput placeholder="John" formControlName="firstName" required />
+      <mat-error *ngIf="registerForm.controls.firstName.invalid">{{
+        getErrorMessage("firstName")
+      }}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <label>Enter your last name</label>
+      <input matInput placeholder="Doe" formControlName="lastName" required />
+      <mat-error *ngIf="registerForm.controls.lastName.invalid">{{
+        getErrorMessage("lastName")
+      }}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <label>Enter your email</label>
+      <input
+        matInput
+        placeholder="pat@example.com"
+        formControlName="email"
+        required
+      />
+      <mat-error *ngIf="registerForm.controls.email.invalid">{{
+        getErrorMessage("email")
+      }}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Enter your password</mat-label>
+      <input
+        matInput
+        formControlName="password"
+        [type]="hidePassword ? 'password' : 'text'"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hidePassword = !hidePassword"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hidePassword"
+      >
+        <mat-icon>{{
+          hidePassword ? "visibility_off" : "visibility"
+        }}</mat-icon>
+      </button>
+      <mat-error *ngIf="registerForm.controls.password.invalid">{{
+        getPasswordError()
+      }}</mat-error>
+    </mat-form-field>
+    <button
+      class="btn-submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="!registerForm.valid"
+    >
+      Create user
+    </button>
+  </form>
+</div>
